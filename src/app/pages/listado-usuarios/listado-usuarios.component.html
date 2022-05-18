@@ -1,0 +1,30 @@
+<div style="text-align: center;">
+    <h1>Listado usuarios</h1>
+</div>
+<br>
+<div *ngIf="($usuarios | async) as usuarios">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Correo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios.data">
+                <td>{{ usuario.first_name }}</td>
+                <td>{{ usuario.last_name }}</td>
+                <td>{{ usuario.email }}</td>
+                <td><button (click)="onClickUsuario(usuario.id)">Ver</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br><br>
+<div style="display: flex; justify-content: space-between;">
+    <button (click)="onClickPrev()"><- Previous</button>
+    <span>Página {{ page }}</span>
+    <button (click)="onClickNext()">Next -></button>
+</div>
