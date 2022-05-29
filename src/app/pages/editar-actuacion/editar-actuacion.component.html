@@ -1,0 +1,44 @@
+<br><br>
+<button (click)="volver()">Volver</button>
+<br><br>
+<div>
+    <form *ngIf="formActuacion" [formGroup]="formActuacion" (ngSubmit)="onSubmit()">
+
+        <label for="descripcion"><strong>Descripción:</strong> </label><br>
+        <input id="descripcion" type="text" formControlName="descripcion">
+        
+        <br><br>
+        
+        <label for="direccion"><strong>Dirección:</strong> </label><br>
+        <input id="direccion" type="text" formControlName="direccion">
+        
+        <br><br>
+        
+        <label for="lat"><strong>Latitud:</strong> </label><br>
+        <input id="lat" type="text" formControlName="lat">
+        
+        <br><br>
+        
+        <label for="lng"><strong>Longitud:</strong> </label><br>
+        <input id="lng" type="text" formControlName="lng">
+        
+        <br><br>
+        
+        <label for="urgente"><strong>Urgente:</strong> </label>
+        <input id="urgente" type="checkbox" formControlName="urgente">
+        
+        <br><br>
+        
+        <label for="citada"><strong>Citada:</strong> </label>
+        <input id="citada" type="checkbox" formControlName="citada">
+        
+        <br><br>
+        
+        <label for="hora_cita"><strong>Hora cita:</strong> </label><br>
+        <input id="hora_cita" type="text" formControlName="hora_cita">
+
+        <br><br>
+
+        <button type="submit" [disabled]="!formActuacion.valid">Guardar</button>
+    </form>
+</div>

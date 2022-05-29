@@ -8,9 +8,22 @@ import { Observable } from 'rxjs';
 export class ListadoUsuariosService {
   constructor(private http: HttpClient) {}
 
-  getUsuarios(page: number): Observable<any> {
+  getActuaciones(page: number): Observable<any> {
     return this.http.get<any>(
-      'https://reqres.in/api/users?page=' + page.toString()
+      'http://127.0.0.1:8000/actuaciones/list?page=' + page.toString()
+    );
+  }
+
+  getActuacion(id: number): Observable<any> {
+    return this.http.get<any>(
+      'http://127.0.0.1:8000/actuaciones/' + id.toString()
+    );
+  }
+
+  editarActuacion(id: number, actuacion: any): Observable<any> {
+    return this.http.put<any>(
+      'http://127.0.0.1:8000/actuaciones/update/' + id.toString(),
+      actuacion
     );
   }
 }

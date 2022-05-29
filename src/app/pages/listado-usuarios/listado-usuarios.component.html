@@ -6,17 +6,17 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Correo</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Urgente</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let usuario of usuarios.data">
-                <td>{{ usuario.first_name }}</td>
-                <td>{{ usuario.last_name }}</td>
-                <td>{{ usuario.email }}</td>
+            <tr *ngFor="let usuario of usuarios.results">
+                <td>{{ usuario.descripcion }}</td>
+                <td>{{ usuario.direccion | direccion }}</td>
+                <td>{{ usuario.urgente }}</td>
                 <td><button (click)="onClickUsuario(usuario.id)">Ver</button></td>
             </tr>
         </tbody>
@@ -24,7 +24,15 @@
 </div>
 <br><br>
 <div style="display: flex; justify-content: space-between;">
-    <button (click)="onClickPrev()"><- Previous</button>
+    <div>
+        <button (click)="onClickPrev()"><- Anterior</button>
+        <br><br>
+        <button (click)="onClickPrimera()"><<- Primera</button>
+    </div>
     <span>Página {{ page }}</span>
-    <button (click)="onClickNext()">Next -></button>
+    <div>
+        <button (click)="onClickNext()">Siguiente -></button>
+        <br><br>
+        <button (click)="onClickUltima()">Última ->></button>
+    </div>
 </div>

@@ -1,0 +1,39 @@
+<br><br>
+<button (click)="volver()">Volver</button>
+<br><br>
+<div *ngIf="($usuario | async) as usuario">
+    <table class="table">
+            <tr>
+                <th scope="col">Descripcion</th>
+                <td>{{ usuario.descripcion }}</td>
+            </tr>    
+            <tr>
+                <th scope="col">Direccion</th>
+                <td>{{ usuario.direccion }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Latitud</th>
+                <td>{{ usuario.lat }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Longitud</th>
+                <td>{{ usuario.lng }}</td>
+            </tr>
+            <tr>
+                <th scope="col">Urgente</th>
+                <td *ngIf="usuario.urgente">Sí</td>
+                <td *ngIf="!usuario.urgente">No</td>
+            </tr>
+            <tr>
+                <th scope="col">Citada</th>
+                <td *ngIf="usuario.citada">Sí</td>
+                <td *ngIf="!usuario.citada">No</td>
+            </tr>
+            <tr *ngIf="usuario.citada">
+                <th scope="col">Hora cita</th>
+                <td>{{ usuario.hora_cita }}</td>
+            </tr>
+    </table>
+</div>
+<br><br>
+<button (click)="editar()">Editar</button>

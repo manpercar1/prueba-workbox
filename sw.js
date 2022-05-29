@@ -1757,7 +1757,54 @@ This is generally NOT safe. Learn more at https://bit.ly/wb-precache`;
   };
 
   // sw.ts
+  var manualCacheMod = {
+    fetchDidFail: async (args) => {
+      const { originalRequest, request, error, event, state } = args;
+      console.log(originalRequest, request, error, event, state);
+      caches.open("api-responses").then((cache) => {
+        console.log(cache);
+        cache.match(request).then((object) => {
+          console.log(object);
+        });
+        cache.put(request.url, new Response(JSON.stringify({
+          data: [
+            {
+              avatar: "https://reqres.in/img/faces/7-image.jpg",
+              email: "michael.lawson@reqres.in",
+              first_name: "Michael",
+              id: 7,
+              last_name: "Lawson"
+            },
+            {
+              avatar: "https://reqres.in/img/faces/8-image.jpg",
+              email: "lindsay.ferguson@reqres.in",
+              first_name: "Lindsay",
+              id: 8,
+              last_name: "Ferguson"
+            }
+          ],
+          page: 2,
+          per_page: 6,
+          support: {
+            text: "To keep ReqRes free, contributions towards server costs are appreciated!",
+            url: "https://reqres.in/#support-heading"
+          },
+          total: 12,
+          total_pages: 2
+        })));
+      });
+    }
+  };
   precacheAndRoute(self.__WB_MANIFEST);
   registerRoute(({ request }) => request.mode === "navigate", new NetworkFirst({ cacheName: "pagesworkbox" }));
-  registerRoute(({ request }) => request.url.includes("https://reqres.in/api/users?page="), new NetworkFirst({ cacheName: "api-responses" }));
+  registerRoute(({ request }) => request.url.includes("https://reqres.in/api/users?page=1"), new NetworkFirst({
+    cacheName: "api-responses"
+  }));
+  registerRoute(({ request }) => request.url.includes("https://reqres.in/api/users?page=2"), new NetworkFirst({
+    cacheName: "api-responses",
+    plugins: [manualCacheMod]
+  }));
+  registerRoute(({ request }) => request.url.includes("https://reqres.in/api/users/"), new NetworkFirst({
+    cacheName: "api-responses"
+  }));
 })();
